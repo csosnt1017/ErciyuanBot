@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.mapper.StatementWarehouseMapper">
+    <resultMap id="BaseResultMap" type="com.example.dao.entity.StatementWarehouse">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="keyWord" jdbcType="VARCHAR" property="keyWord"/>
+        <result column="keyValue" jdbcType="VARCHAR" property="keyValue"/>
+        <result column="fromQQ" jdbcType="VARCHAR" property="fromQQ"/>
+        <result column="gmtCreate" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmtModify" jdbcType="TIMESTAMP" property="gmtModify"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, keyWord, keyValue, fromQQ, gmtCreate, gmtModify
+  </sql>
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+
+        from jcq_statement_warehouse
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByKeyWord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+
+        from jcq_statement_warehouse
+        where keyWord = #{keyWord,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+
+        from jcq_statement_warehouse
+    </select>
+
+    <insert id="insert" parameterType="com.example.dao.entity.StatementWarehouse">
+        insert into jcq_statement_warehouse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="keyWord != null">
+                keyWord,
+            </if>
+            <if test="keyValue != null">
+                keyValue,
+            </if>
+            <if test="fromQQ != null">
+                fromQQ,
+            </if>
+            <if test="gmtCreate != null">
+                gmtCreate,
+            </if>
+            <if test="gmtModify != null">
+                gmtModify,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="keyWord != null">
+                #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="keyValue != null">
+                #{keyValue,jdbcType=VARCHAR},
+            </if>
+            <if test="fromQQ != null">
+                #{fromQQ,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModify != null">
+                #{gmtModify,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.example.dao.entity.StatementWarehouse">
+        update jcq_statement_warehouse
+        <set>
+            <if test="keyWord != null">
+                keyWord = #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="keyValue != null">
+                keyValue = #{keyValue,jdbcType=VARCHAR},
+            </if>
+            <if test="fromQQ != null">
+                fromQQ = #{fromQQ,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                gmtCreate = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModify != null">
+                gmtModify = #{gmtModify,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.mapper.StatementWarehouseImgMapper">
+    <resultMap id="BaseResultMap" type="com.example.dao.entity.StatementWarehouseImg">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="fileKey" jdbcType="VARCHAR" property="fileKey"/>
+        <result column="fileName" jdbcType="VARCHAR" property="fileName"/>
+        <result column="fromQQ" jdbcType="VARCHAR" property="fromQQ"/>
+        <result column="gmtCreate" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmtModify" jdbcType="TIMESTAMP" property="gmtModify"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, fileKey, fileName, fromQQ, gmtCreate, gmtModify
+  </sql>
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+
+        from jcq_statement_warehouse_img
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByFileKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+
+        from jcq_statement_warehouse_img
+        where keyWord = #{keyWord,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+
+        from jcq_statement_warehouse_img
+    </select>
+
+    <insert id="insert" parameterType="com.example.dao.entity.StatementWarehouseImg">
+        insert into jcq_statement_warehouse_img
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="fileKey != null">
+                fileKey,
+            </if>
+            <if test="fileName != null">
+                fileName,
+            </if>
+            <if test="fromQQ != null">
+                fromQQ,
+            </if>
+            <if test="gmtCreate != null">
+                gmtCreate,
+            </if>
+            <if test="gmtModify != null">
+                gmtModify,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="fileKey != null">
+                #{fileKey,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fromQQ != null">
+                #{fromQQ,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModify != null">
+                #{gmtModify,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.example.dao.entity.StatementWarehouseImg">
+        update jcq_statement_warehouse_img
+        <set>
+            <if test="fileKey != null">
+                fileKey = #{fileKey,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                fileName = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fromQQ != null">
+                fromQQ = #{fromQQ,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                gmtCreate = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModify != null">
+                gmtModify = #{gmtModify,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>
